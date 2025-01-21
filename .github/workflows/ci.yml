@@ -1,0 +1,34 @@
+name: Machine Learning Model CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set Up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install Dependencies
+      run: |
+        python -m venv ml_env
+        source ml_env/bin/activate
+        pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Model Script
+      run: |
+        source ml_env/bin/activate
+        python app.py
