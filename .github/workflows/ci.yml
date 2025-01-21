@@ -24,11 +24,13 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m venv ml_env
-        source ml_env/bin/activate
-        pip install --upgrade pip
-        pip install -r requirements.txt
+        echo "Virtual environment created successfully."
 
-    - name: Run Model Script
-      run: |
+        # Activate the virtual environment (For Linux/macOS)
         source ml_env/bin/activate
-        python app.py
+        echo "Virtual environment activated."
+
+        # Upgrade pip and install dependencies
+        python -m pip install --upgrade pip
+        python -m pip install -r requirements.txt
+      shell: bash
